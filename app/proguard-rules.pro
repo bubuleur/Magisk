@@ -16,34 +16,40 @@
 #   public *;
 #}
 
-# BouncyCastle
--keep,allowoptimization class org.bouncycastle.jcajce.provider.asymmetric.rsa.**SHA1** { *; }
--keep,allowoptimization class org.bouncycastle.jcajce.provider.asymmetric.RSA** { *; }
--keep,allowoptimization class org.bouncycastle.jcajce.provider.digest.SHA1** { *; }
--dontwarn javax.naming.**
-
-# Snet
--keepclassmembers class com.topjohnwu.magisk.utils.ISafetyNetHelper { *; }
--keep,allowobfuscation interface com.topjohnwu.magisk.utils.ISafetyNetHelper$Callback
--keepclassmembers class * implements com.topjohnwu.magisk.utils.ISafetyNetHelper$Callback {
-  void onResponse(int);
+# Kotlin
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+	public static void check*(...);
+	public static void throw*(...);
 }
 
-# BootSigner
--keepclassmembers class com.topjohnwu.signing.BootSigner { *; }
+# Snet
+-keepclassmembers class com.topjohnwu.magisk.ui.safetynet.SafetyNetHelper { *; }
+-keep,allowobfuscation interface com.topjohnwu.magisk.ui.safetynet.SafetyNetHelper$Callback
+-keepclassmembers class * implements com.topjohnwu.magisk.ui.safetynet.SafetyNetHelper$Callback { *; }
 
-# SVG
--dontwarn com.caverock.androidsvg.SVGAndroidRenderer
+# Stub
+-keep class com.topjohnwu.magisk.core.App { <init>(java.lang.Object); }
+-keepclassmembers class androidx.appcompat.app.AppCompatDelegateImpl {
+  boolean mActivityHandlesUiModeChecked;
+  boolean mActivityHandlesUiMode;
+}
 
-# RetroStreams
--dontwarn java9.**
-
-# Strip logging
--assumenosideeffects class com.topjohnwu.magisk.utils.Logger {
-  public *** debug(...);
+# Strip Timber verbose and debug logging
+-assumenosideeffects class timber.log.Timber$Tree {
+  public void v(**);
+  public void d(**);
 }
 
 # Excessive obfuscation
 -repackageclasses 'a'
 -allowaccessmodification
--optimizationpasses 6
+
+-dontwarn org.bouncycastle.jsse.BCSSLParameters
+-dontwarn org.bouncycastle.jsse.BCSSLSocket
+-dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider
+-dontwarn org.commonmark.ext.gfm.strikethrough.Strikethrough
+-dontwarn org.conscrypt.Conscrypt*
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
+-dontwarn org.openjsse.javax.net.ssl.SSLParameters
+-dontwarn org.openjsse.javax.net.ssl.SSLSocket
+-dontwarn org.openjsse.net.ssl.OpenJSSE
