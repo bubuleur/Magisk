@@ -1,42 +1,45 @@
-# Magisk
+![](docs/images/logo.png)
 
-[Downloads](https://github.com/topjohnwu/Magisk/releases) \| [Documentation](https://topjohnwu.github.io/Magisk/) \| [XDA Thread](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)
+[![Downloads](https://img.shields.io/badge/dynamic/json?color=green&label=Downloads&query=totalString&url=https%3A%2F%2Fraw.githubusercontent.com%2Ftopjohnwu%2Fmagisk-files%2Fcount%2Fcount.json&cacheSeconds=1800)](https://raw.githubusercontent.com/topjohnwu/magisk-files/count/count.json)
+
+#### This is not an officially supported Google product
 
 ## Introduction
 
-Magisk is a suite of open source tools for customizing Android, supporting devices higher than Android 4.2 (API 17). It covers the fundamental parts for Android customization: root, boot scripts, SELinux patches, AVB2.0 / dm-verity / forceencrypt removals etc.
+Magisk is a suite of open source software for customizing Android, supporting devices higher than Android 7.0.<br>
+Some highlight features:
 
-Furthermore, Magisk provides a **Systemless Interface** to alter the system (or vendor) arbitrarily while the actual partitions stay completely intact. With its systemless nature along with several other hacks, Magisk can hide modifications from nearly any system integrity verifications used in banking apps, corporation monitoring apps, game cheat detections, and most importantly [Google's SafetyNet API](https://developer.android.com/training/safetynet/index.html).
+- **MagiskSU**: Provide root access for applications
+- **Magisk Modules**: Modify read-only partitions by installing modules
+- **MagiskBoot**: The most complete tool for unpacking and repacking Android boot images
+- **Zygisk**: Run code in every Android applications' processes
+
+## Downloads
+
+[Github](https://github.com/topjohnwu/Magisk/releases) is the only source where you can get official Magisk information and downloads.
+
+## Useful Links
+
+- [Installation Instruction](https://topjohnwu.github.io/Magisk/install.html)
+- [Building and Development](https://topjohnwu.github.io/Magisk/build.html)
+- [Magisk Documentation](https://topjohnwu.github.io/Magisk/)
+- [Zygisk module sample](https://github.com/topjohnwu/zygisk-module-sample)
 
 ## Bug Reports
 
-**Make sure to install the latest [Canary Build](https://forum.xda-developers.com/apps/magisk/dev-magisk-canary-channel-bleeding-edge-t3839337) before reporting any bugs!** **DO NOT** report bugs that is already fixed upstream. Follow the instructions in the [Canary Channel XDA Thread](https://forum.xda-developers.com/apps/magisk/dev-magisk-canary-channel-bleeding-edge-t3839337), and report a bug either by opening an issue on GitHub or directly in the thread.
+**Only bug reports from Debug builds will be accepted.**
 
-## Building Environment Requirements
+For installation issues, upload both boot image and install logs.<br>
+For Magisk issues, upload boot logcat or dmesg.<br>
+For Magisk app crashes, record and upload the logcat when the crash occurs.
 
--  Python 3: run `build.py` script
--  Java Development Kit (JDK) 8: Compile Magisk Manager and sign zips
--  Latest Android SDK: set `ANDROID_HOME` environment variable to the path to Android SDK
--  Android NDK: Install NDK along with SDK (`$ANDROID_HOME/ndk-bundle`), or optionally specify a custom path `ANDROID_NDK_HOME`
--  (Windows Only) Python package Colorama: Install with `pip install colorama`, used for ANSI color codes
+## Translation Contributions
 
-## Building Notes and Instructions
+Default string resources for the Magisk app are located here:
 
--  Clone sources with submodules: `git clone --recurse-submodules https://github.com/topjohnwu/Magisk.git`
--  Building is supported on macOS, Linux, and Windows. Official releases are built and tested with [FrankeNDK](https://github.com/topjohnwu/FrankeNDK); point `ANDROID_NDK_HOME` to FrankeNDK if you want to use it for compiling.
--  Set configurations in `config.prop`. A sample file `config.prop.sample` is provided as an example.
--  Run `build.py` with argument `-h` to see the built-in help message. The `-h` option also works for each supported actions, e.g. `./build.py binary -h`
--  By default, `build.py` build binaries and Magisk Manager in debug mode. If you want to build Magisk Manager in release mode (via the `-r, --release` flag), you need a Java Keystore file `release-key.jks` (only `JKS` format is supported) to sign APKs and zips. For more information, check out [Google's Official Documentation](https://developer.android.com/studio/publish/app-signing.html#signing-manually).
+- `app/core/src/main/res/values/strings.xml`
 
-## Translations
-
-Default string resources for Magisk Manager are scattered throughout
-
-- `app/src/main/res/values/strings.xml`
-- `stub/src/main/res/values/strings.xml`
-- `shared/src/main/res/values/strings.xml`
-
-Translate each and place them in the respective locations (`<module>/src/main/res/values-<lang>/strings.xml`).
+Translate each and place them in the respective locations (`[module]/src/main/res/values-[lang]/strings.xml`).
 
 ## License
 
